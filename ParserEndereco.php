@@ -1,24 +1,24 @@
 <?php
 	//***********************************************************************************************
-	// AUTOR: Ricardo Erick RebÃªlo
-	// Objetivo: separar um endereÃ§o em logradouro / nÃºmero / complemento
-	// Obs.: tudo o que aparece apÃ³s o nÃºmero Ã© considerado complemento
-	// VersÃ£o Original: 01/10/2009 - Ricardo Erick RebÃªlo
-	// AlteraÃ§Ãµes:
-	// 1.0   27/06/2010 - VersÃ£o final da primeira conversÃ£o
-	// 1.01  26/02/2016 - Recuperada versÃ£o mais recente de http://pastebin.com/5cqxEsAU de 15/10/2013
-	//                   apÃ³s perda da versÃ£o de trabalho na desinstalaÃ§Ã£o do XAMPP
-	// 1.1   26/02/2016 - alteraÃ§Ã£o para uso em php 5.3.0 com namespace jacknpoe
-	// 1.1.1 16/03/2016 - correÃ§Ã£o menor e inclusÃ£o de outros caracteres latin1 na tabela_conversao
+	// AUTOR: Ricardo Erick Rebêlo
+	// Objetivo: separar um endereço em logradouro / número / complemento
+	// Obs.: tudo o que aparece após o número é considerado complemento
+	// Versão Original: 01/10/2009 - Ricardo Erick Rebêlo
+	// Alterações:
+	// 1.0   27/06/2010 - Versão final da primeira conversão
+	// 1.01  26/02/2016 - Recuperada versão mais recente de http://pastebin.com/5cqxEsAU de 15/10/2013
+	//                   após perda da versão de trabalho na desinstalação do XAMPP
+	// 1.1   26/02/2016 - alteração para uso em php 5.3.0 com namespace jacknpoe
+	// 1.1.1 16/03/2016 - correção menor e inclusão de outros caracteres latin1 na tabela_conversao
 
 
 	namespace jacknpoe;
 
 	//***********************************************************************************************
-	// constante indefinida para todas as classes de constantes - NÃƒO REDEFINIR
+	// constante indefinida para todas as classes de constantes - NÃO REDEFINIR
 	define( "INDEFINIDO", 0);
 
-	// informaÃ§Ãµes sobre os TOKENs
+	// informações sobre os TOKENs
 	define( "TOKEN_INF_TIPO", 1);
 	define( "TOKEN_INF_VALOR", 2);
 	define( "TOKEN_INF_FORMATADO", 3);
@@ -34,7 +34,7 @@
 
 		// CONSTANTES
 
-		// versÃ£o atual da classe
+		// versão atual da classe
 		const VERSAO = '1.1.1';
 
 		// tipos de tokens
@@ -48,7 +48,7 @@
 		const TOKEN_IND_LOC = 54;
 		const TOKEN_IND_ANT = 55;
 
-		// estados do autÃ´mato (AFD)
+		// estados do autômato (AFD)
 		const ESTADO_INICIAL = 1;
 		const ESTADO_DIVISOR = 2;
 		const ESTADO_N = 3;
@@ -76,21 +76,21 @@
 		private $_nomes_tokens = array( 
 			INDEFINIDO => '?',
 			self::TOKEN_NOME => 'nome',
-			self::TOKEN_NUMERO => 'nÃºmero',
-			self::TOKEN_N_NUMERO => 'NNÃºmero',
+			self::TOKEN_NUMERO => 'número',
+			self::TOKEN_N_NUMERO => 'NNúmero',
 			self::TOKEN_DIVISOR => 'divisor',
 			self::TOKEN_IND_LOG => 'IndLog',
 			self::TOKEN_IND_NUM => 'IndNum',
 			self::TOKEN_IND_COM => 'IndCom',
 			self::TOKEN_IND_LOC => 'IndLoc',
-			self::TOKEN_IND_ANT => 'IndAnt' );		// utilizar em registros para depuraÃ§Ã£o
+			self::TOKEN_IND_ANT => 'IndAnt' );		// utilizar em registros para depuração
 
 		public $logradouro = '';
 		public $numero = '';
 		public $complemento = '';
 
 
-		// MÃ‰TODOS
+		// MÉTODOS
 
 		function __construct()
 		{
@@ -98,12 +98,12 @@
 		}
 
 
-		function getNomeToken( $tipo)		// recupera o nome de um token para registros de depuraÃ§Ã£o
+		function getNomeToken( $tipo)		// recupera o nome de um token para registros de depuração
 		{
 			return $this->_nomes_tokens[ $tipo];
 		}
 
-		function reconhecerEndereco( $endereco)		// reconhece logradouro, nÃºmero e complemento
+		function reconhecerEndereco( $endereco)		// reconhece logradouro, número e complemento
 		{
 			$inicio = ( $tamanho = ( $token_numero = ( $fim_logradouro = 0)));
 
@@ -113,11 +113,11 @@
 
 			$n_tokens = $this->_tokens->getNumeroTokens();
 
-			// SINTAXE / ConstruÃ§Ãµes Gramaticais (regras de alteraÃ§Ã£o)
+			// SINTAXE / Construções Gramaticais (regras de alteração)
 
 			for( $contador = 1; $contador <= $n_tokens; $contador ++ )		// devemos fazer as regras em todos os tokens
 			{
-				if( $this->_tokens->getTokenInfo( $contador, TOKEN_INF_TIPO) === self::TOKEN_NUMERO )		// coincidentemente, todas contÃ©m <num>
+				if( $this->_tokens->getTokenInfo( $contador, TOKEN_INF_TIPO) === self::TOKEN_NUMERO )		// coincidentemente, todas contém <num>
 				{
 					// regra 1   ( <num><Iant> -> <nome><nome> )
 					if( $this->_tokens->getTokenInfo( $contador+1, TOKEN_INF_TIPO) === self::TOKEN_IND_ANT )
@@ -150,9 +150,9 @@
 				}
 			}
 
-			// UMA DAS REGRAS DA SEMÃ‚NTICA
+			// UMA DAS REGRAS DA SEMÂNTICA
 
-			// primeira regra (especial: se existir TOKEN_N_NUMERO, esse Ã© o nÃºmero no endereÃ§o)
+			// primeira regra (especial: se existir TOKEN_N_NUMERO, esse é o número no endereço)
 			for( $contador = 1; $contador <= $n_tokens; $contador ++ )
 			{
 				if( $this->_tokens->getTokenInfo( $contador, TOKEN_INF_TIPO) === self::TOKEN_N_NUMERO )
@@ -162,7 +162,7 @@
 				}
 			}
 	
-			// ÃšLTIMA REGRA DA SINTAXE (apenas se a primeira semÃ¢ntica falhar)
+			// ÚLTIMA REGRA DA SINTAXE (apenas se a primeira semântica falhar)
 
 			if( $token_numero == 0)
 			{
@@ -176,11 +176,11 @@
 					}
 				}
 
-			// SEMÃ‚NTICA (excetuando a primeira regra especial; principalmente exceÃ§Ãµes)
+			// SEMÂNTICA (excetuando a primeira regra especial; principalmente exceções)
 
 				for( $contador = $n_tokens; $contador >= 1; $contador -- )
 				{
-					// procuramos por um <Nnum> convertido na Ãºltima regra sintÃ¡tica, mas da direita para a esquerda
+					// procuramos por um <Nnum> convertido na última regra sintática, mas da direita para a esquerda
 					if( $this->_tokens->getTokenInfo( $contador, TOKEN_INF_TIPO) === self::TOKEN_N_NUMERO )
 					{
 						$token_numero = $contador;
@@ -189,7 +189,7 @@
 				}
 			}
 
-			// neste ponto, se $token_numero == 0, nÃ£o existe nÃºmero e apenas procuramos pelo S/N
+			// neste ponto, se $token_numero == 0, não existe número e apenas procuramos pelo S/N
 
 			if( $token_numero == 0)
 			{
@@ -219,7 +219,7 @@
 					}
 				}
 
-			// neste ponto, se $token_numero == 0, nÃ£o existe nÃºmero nem S/N
+			// neste ponto, se $token_numero == 0, não existe número nem S/N
 
 				if( $token_numero == 0)
 				{
@@ -244,7 +244,7 @@
 			return TRUE;
 		}
 
-		private function retornarSemSimbolos( $texto)		// retira espaÃ§os e sÃ­mbolos (ver abaixo) do inÃ­cio e do final de um texto
+		private function retornarSemSimbolos( $texto)		// retira espaços e símbolos (ver abaixo) do início e do final de um texto
 		{
 			$antiga = '';
 			$texto = trim( $texto);
@@ -254,10 +254,10 @@
 				$antiga = $texto;
 
 //				strpos( '|SN|SNO|SNRO|', $this->_tokens->getTokenInfo( $contador, TOKEN_INF_FORMATADO)) !== FALSE
-				if( strpos( '!@"#$%-=*&,.;:/?Â´^~_Â§Â°', $texto[0]) !== FALSE)
+				if( strpos( '!@"#$%-=*&,.;:/?´^~_§°', $texto[0]) !== FALSE)
 					$texto = substr( $texto, 1);
 
-				if( strpos( '!@"#$%-=*&,.;:/?Â´^~_Â§Â°', $texto[ strlen( $texto)-1 ]) !== FALSE)
+				if( strpos( '!@"#$%-=*&,.;:/?´^~_§°', $texto[ strlen( $texto)-1 ]) !== FALSE)
 					$texto = substr( $texto, 0, -1);  	//	$texto = substr( $texto, 0, strlen( $texto)-1);
 
 				$texto = trim( $texto);
@@ -391,7 +391,7 @@
 								break;
 
 							default:
-								// erro (futura implementaÃ§Ã£o?)
+								// erro (futura implementação?)
 						}	// switch $estado
 					}	// if $caracter nulo
 
@@ -426,7 +426,7 @@
 						$token = self::TOKEN_NUMERO;
 						break;
 					default:
-						// erro (futura implementaÃ§Ã£o?)
+						// erro (futura implementação?)
 				}
 
 				$valor = substr( $endereco, 0, $posicao);
@@ -445,17 +445,17 @@
 		
 		private $_tabela_conversao = array(
 			// C0 a FF (todas, em ordem)
-			'Ã€'=>'A', 'Ã'=>'A', 'Ã‚'=>'A', 'Ãƒ'=>'A', 'Ã„'=>'A', 'Ã…'=>'A', 'Ã†'=>'AE', 'Ã‡'=>'C',
-			'Ãˆ'=>'E', 'Ã‰'=>'E', 'ÃŠ'=>'E', 'Ã‹'=>'E', 'ÃŒ'=>'I', 'Ã'=>'I', 'ÃŽ'=>'I',  'Ã'=>'I',
-			'Ã'=>'D', 'Ã‘'=>'N', 'Ã’'=>'O', 'Ã“'=>'O', 'Ã”'=>'O', 'Ã•'=>'O', 'Ã–'=>'O',  'Ã—'=>'x',
-			'Ã˜'=>'O', 'Ã™'=>'U', 'Ãš'=>'U', 'Ã›'=>'U', 'Ãœ'=>'U', 'Ã'=>'Y', 'Ãž'=>'B', 'ÃŸ'=>'Ss',
-			'Ã '=>'a', 'Ã¡'=>'a', 'Ã¢'=>'a', 'Ã£'=>'a', 'Ã¤'=>'a', 'Ã¥'=>'a', 'Ã¦'=>'ae', 'Ã§'=>'c',
-			'Ã¨'=>'e', 'Ã©'=>'e', 'Ãª'=>'e', 'Ã«'=>'e', 'Ã¬'=>'i', 'Ã­'=>'i', 'Ã®'=>'i',  'Ã¯'=>'i',
-			'Ã°'=>'o', 'Ã±'=>'n', 'Ã²'=>'o', 'Ã³'=>'o',	'Ã´'=>'o', 'Ãµ'=>'o', 'Ã¶'=>'o',  'Ã·'=>'/',
-			'Ã¸'=>'o', 'Ã¹'=>'u', 'Ãº'=>'u', 'Ã»'=>'u', 'Ã¼'=>'u', 'Ã½'=>'y', 'Ã¾'=>'b',  'Ã¿'=>'y',
+			'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'AE', 'Ç'=>'C',
+			'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',  'Ï'=>'I',
+			'Ð'=>'D', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O',  '×'=>'x',
+			'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss',
+			'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'ae', 'ç'=>'c',
+			'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',  'ï'=>'i',
+			'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o',	'ô'=>'o', 'õ'=>'o', 'ö'=>'o',  '÷'=>'/',
+			'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'þ'=>'b',  'ÿ'=>'y',
 			// A0 a BF (algumas, fora de ordem)
-			'Â°'=>'o', 'Âº'=>'o', 'Âª'=>'a', 'Â¢'=>'c', 'Â¹'=>'1', 'Â²'=>'2', 'Â³'=>'3',  'Â£'=>'L',
-			'Â¥'=>'Y', 'Â¦'=>'|', 'Â§'=>'S', 'Â©'=>'C', 'Â­'=>'-', 'Â®'=>'R', 'Âµ'=>'u'
+			'°'=>'o', 'º'=>'o', 'ª'=>'a', '¢'=>'c', '¹'=>'1', '²'=>'2', '³'=>'3',  '£'=>'L',
+			'¥'=>'Y', '¦'=>'|', '§'=>'S', '©'=>'C', '­'=>'-', '®'=>'R', 'µ'=>'u'
 	    	); // retirado do manual do PHP (allixsenos at gmail dot com) 
 			   // alterada ordem e acrescentados alguns caracteres para compatibilizar melhor
 
@@ -590,7 +590,7 @@
 
 
 	//***********************************************************************************************
-	// Classe com lista com as informaÃ§Ãµes sobre cada Token que a anÃ¡lise lÃ©xica encontrar
+	// Classe com lista com as informações sobre cada Token que a análise léxica encontrar
 
 	class TokenEndereco
 	{
@@ -599,9 +599,9 @@
 		private $_tokens = array();
 		private $_n_tokens = 0;
 
-		// MÃ‰TODOS
+		// MÉTODOS
 
-		function getNumeroTokens()		// get do nÃºmero total de Tokens armazenados
+		function getNumeroTokens()		// get do número total de Tokens armazenados
 		{
 			return $this->_n_tokens;
 		}
@@ -630,7 +630,7 @@
 			$this->_n_tokens = 0;
 		}
 
-		function getTokenInfo( $token, $informacao)		// recupera informaÃ§Ã£o de um token (inclusive inexistente)
+		function getTokenInfo( $token, $informacao)		// recupera informação de um token (inclusive inexistente)
 		{
 			if( $token > 0 and $token <= $this->_n_tokens and is_array( $this->_tokens[ $token]) )
 			{
@@ -657,7 +657,7 @@
 			}
 		}
 
-		function setTokenInfo( $token, $informacao, $valor)		// escreve informaÃ§Ã£o de um token (retorna se existe o token)
+		function setTokenInfo( $token, $informacao, $valor)		// escreve informação de um token (retorna se existe o token)
 		{
 			if( is_array( $this->_tokens[ $token]) )
 			{

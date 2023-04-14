@@ -4,7 +4,7 @@
 		<title>Teste de Classe \jacknpoe\ParserEndereco (para fisco em NF-e)</title>
 		<link rel="stylesheet" href="php_testeparser.css"/>
 		<link rel="icon" type="image/png" href="php_testeparser.png"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
 		<?php
@@ -20,6 +20,7 @@
 			define( "COMPLEMENTO", 'Complemento');
 			define( "PROCESSAR",   'Processar');
 			define( "ENDERECO",    'Endereço:');
+			define( "GITHUB",      'Repositório no GitHub');
 
 			$endereco = '';
 			$resultado = '';
@@ -55,5 +56,6 @@
 		</form>
 
 		<br><?php echo $resultado; ?><br><br>
+		<p><a href="https://github.com/jacknpoe/php_testeparser"><?php echo GITHUB; ?></a></p>
 	</body>
 </html>
