@@ -531,7 +531,7 @@
 		                            'CXA', 'CAIXA', 'POSTAL', 'CX', 'CP', 'PERTO', 'PROXIMO', 'PROX', 'APAR', 'ESQU',
 		                            'LOJA', 'LJ', 'L' );
 		private $_ind_ante = array( 'ANDAR', 'PISO' );
-		private $_ind_loca = array( 'ED', 'KM', 'EDIFICIO', 'EDIF', 'EDF', 'QUADRA', 'LOTE', 'LT', 'QD', 'BOX', 'CASA', 'GALPAO' );
+		private $_ind_loca = array( 'ED', 'KM', 'EDIFICIO', 'EDIF', 'EDF', 'QUADRA', 'LOTE', 'LT', 'QD', 'BOX', 'CASA', 'GALPAO');
 		private $_ind_logr = array( 'RUA', 'R', 'BR', 'ROD', 'AVENIDA', 'AV', 'AVEN', 'EST', 'ESTRADA', 'RODOVIA',
 		                            'AL', 'ALAMEDA', 'TRAV', 'TRV', 'TRAVESSA', 'PR', 'PRC', 'PRACA', 'PATIO',
 		                            'ALMD', 'PRAA', 'LINHA', 'TV', 'AVDA', 'RD', 'PCA', 'PC', 'ESTADUAL', 'FEDERAL' );

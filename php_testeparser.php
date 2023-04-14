@@ -19,7 +19,7 @@
 			define( "NUMERO",      'Número');
 			define( "COMPLEMENTO", 'Complemento');
 			define( "PROCESSAR",   'Processar');
-			define( "ENDERECO",    'Endereço:');
+			define( "ENDERECO",    'Endereço (sem CEP):');
 			define( "GITHUB",      'Repositório no GitHub');
 
 			$endereco = '';
