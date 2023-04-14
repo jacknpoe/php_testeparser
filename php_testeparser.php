@@ -1,8 +1,10 @@
-<html>
+<!doctype html>
+<html lang="pt-BR">
 	<head>
 		<title>Teste de Classe \jacknpoe\ParserEndereco (para fisco em NF-e)</title>
-		<link rel="stylesheet" type="text/css" href="php_testeparser.css" media="screen" />
+		<link rel="stylesheet" href="php_testeparser.css"/>
 		<link rel="icon" type="image/png" href="php_testeparser.png"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
 		<?php
