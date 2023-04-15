@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 	<head>
 		<title>Teste de Classe \jacknpoe\ParserEndereco (para fisco em NF-e)</title>
