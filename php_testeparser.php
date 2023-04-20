@@ -8,7 +8,6 @@
 	</head>
 	<body>
 		<?php
-//			header( "Content-Type: text/html; charset=UTF-8", true);
 			header( "Content-Type: text/html; charset=ISO-8859-1", true);
 
 			define( "EST_NENHUM",  'Nenhum endereço enviado até o momento!');
@@ -56,6 +55,9 @@
 		</form>
 
 		<br><?php echo $resultado; ?><br><br>
-		<p><a href="https://github.com/jacknpoe/php_testeparser"><?php echo GITHUB; ?></a></p>
+		<p><a href="https://github.com/jacknpoe/php_testeparser"><?php echo GITHUB; ?></a></p><br><br>
+		<form action="index.html" method="POST" style="border: 0px">
+			<p><input type="submit" name="voltar" value="Voltar"></p>
+		</form>
 	</body>
 </html>
