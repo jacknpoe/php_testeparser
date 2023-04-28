@@ -50,7 +50,7 @@
 		<h1><?php echo $estado; ?><br></h1>
 
 		<form action="php_testeparser.php" method="POST" style="border: 0px">
-			<p><?php echo ENDERECO; ?> <input type="text" name="endereco" value="<?php echo $endereco; ?>" style="width: 500px"></p>
+			<p><?php echo ENDERECO; ?> <input type="text" name="endereco" value="<?php echo $endereco; ?>" style="width: 500px" autofocus></p>
 			<p><input type="submit" name="processar" value="<?php echo PROCESSAR; ?>"></p>
 		</form>
 
