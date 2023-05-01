@@ -36,9 +36,9 @@
 					$parser->reconhecerEndereco( $endereco);
 
 					$resultado = '<h1>' . RESULTADO . ': <br></h1>' . 
-						'<p>' . LOGRADOURO . ': '  . $parser->logradouro  . '</p>' .
-						'<p>' . NUMERO . ': '      . $parser->numero      . '</p>' .
-						'<p>' . COMPLEMENTO . ': ' . $parser->complemento . '</p>';
+						'<p>' . LOGRADOURO . ': '  . htmlspecialchars( $parser->logradouro, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, "ISO-8859-1")  . '</p>' .
+						'<p>' . NUMERO . ': '      . htmlspecialchars( $parser->numero, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, "ISO-8859-1")      . '</p>' .
+						'<p>' . COMPLEMENTO . ': ' . htmlspecialchars( $parser->complemento, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, "ISO-8859-1") . '</p>';
 					$estado = EST_ENVIADO;	
 				}
 				else
@@ -50,7 +50,7 @@
 		<h1><?php echo $estado; ?><br></h1>
 
 		<form action="php_testeparser.php" method="POST" style="border: 0px">
-			<p><?php echo ENDERECO; ?> <input type="text" name="endereco" value="<?php echo $endereco; ?>" style="width: 500px" autofocus></p>
+			<p><?php echo ENDERECO; ?> <input type="text" name="endereco" value="<?php echo htmlspecialchars( $endereco, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401, "ISO-8859-1"); ?>" style="width: 500px" autofocus></p>
 			<p><input type="submit" name="processar" value="<?php echo PROCESSAR; ?>"></p>
 		</form>
 
